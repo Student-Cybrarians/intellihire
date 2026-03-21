@@ -3,7 +3,7 @@ services:
     name: intellihire-api
     runtime: python
     plan: free
-    buildCommand: pip install -r requirements.txt && python -m spacy download en_core_web_sm
+    buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
@@ -21,11 +21,7 @@ services:
         sync: false
       - key: ALLOWED_ORIGINS
         value: "https://student-cybrarians.github.io"
-      - key: SPACY_MODEL
-        value: en_core_web_sm
       - key: UPLOAD_DIR
         value: /tmp/uploads
       - key: REPORTS_DIR
         value: /tmp/reports
-      - key: PYTHONPATH
-        value: /opt/render/project/src

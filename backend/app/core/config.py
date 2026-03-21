@@ -23,7 +23,6 @@ class Settings(BaseSettings):
     MAX_UPLOAD_SIZE_MB: int = 10
     ALLOWED_EXTENSIONS: List[str] = ["pdf", "docx"]
     REPORTS_DIR: Path = Path("./reports")
-    SPACY_MODEL: str = "en_core_web_sm"
     SCORE_WEIGHTS: dict = {"keyword_match":0.30,"skills_match":0.20,"experience_relevance":0.20,"formatting":0.10,"readability":0.10,"section_completeness":0.10}
     def get_allowed_origins(self) -> List[str]:
         if isinstance(self.ALLOWED_ORIGINS, list): return self.ALLOWED_ORIGINS
