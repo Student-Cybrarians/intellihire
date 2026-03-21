@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+uploads/
+reports/
+*.pdf
+.DS_Store
+.pytest_cache/
+.coverage
+node_modules/

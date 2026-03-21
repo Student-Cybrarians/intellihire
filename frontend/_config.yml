@@ -1,0 +1,11 @@
+# frontend/_config.yml
+# Tells GitHub Pages not to process with Jekyll
+# (we're deploying raw HTML)
+include:
+  - "*.html"
+  - "*.css"
+  - "*.js"
+  - "*.json"
+
+exclude:
+  - "README.md"

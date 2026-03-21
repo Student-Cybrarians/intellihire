@@ -1,0 +1,69 @@
+# render.yaml
+# ─────────────────────────────────────────────────────────
+# IntelliHire — Render.com deployment config
+# One-click deploy: https://render.com/deploy
+#
+# Services:
+#   1. intellihire-api  — FastAPI backend (free tier)
+#   2. intellihire-db   — MongoDB (Render managed DB or Atlas)
+# ─────────────────────────────────────────────────────────
+
+services:
+
+  # ── FastAPI Backend ────────────────────────────────────
+  - type: web
+    name: intellihire-api
+    runtime: python
+    region: oregon
+    plan: free                        # free tier: 512MB RAM, spins down after 15min inactivity
+
+    rootDir: backend                  # FastAPI code lives in /backend subfolder
+
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      python -m spacy download en_core_web_sm
+
+    startCommand: >
+      uvicorn app.main:app
+      --host 0.0.0.0
+      --port $PORT
+      --workers 1
+
+    healthCheckPath: /health
+
+    envVars:
+      # ── App ────────────────────────────────────────────
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
+
+      # ── MongoDB Atlas (set in Render dashboard) ────────
+      - key: MONGODB_URL
+        sync: false                   # Set manually in Render → Environment
+
+      - key: MONGODB_DB_NAME
+        value: intellihire
+
+      # ── LLM API Keys (set in Render dashboard) ─────────
+      - key: LLM_PROVIDER
+        value: openai                 # or: anthropic
+      - key: OPENAI_API_KEY
+        sync: false                   # Set manually in Render → Environment
+      - key: ANTHROPIC_API_KEY
+        sync: false                   # Optional
+
+      # ── CORS: allow GitHub Pages frontend ──────────────
+      - key: ALLOWED_ORIGINS
+        value: "https://YOUR_GITHUB_USERNAME.github.io,http://localhost:3000"
+
+      # ── File paths (Render ephemeral disk) ─────────────
+      - key: UPLOAD_DIR
+        value: /tmp/intellihire/uploads
+      - key: REPORTS_DIR
+        value: /tmp/intellihire/reports
+
+      # ── spaCy ──────────────────────────────────────────
+      - key: SPACY_MODEL
+        value: en_core_web_sm         # use sm on free tier (less RAM)

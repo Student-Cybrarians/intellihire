@@ -1,0 +1,96 @@
+# ─────────────────────────────────────────────────────────
+# IntelliHire — docker-compose.yml
+# Services: intellihire-api, mongodb, mongo-express (dev UI)
+# ─────────────────────────────────────────────────────────
+
+version: "3.9"
+
+services:
+
+  # ── IntelliHire API ────────────────────────────────────
+  intellihire-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    container_name: intellihire_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - MONGODB_DB_NAME=intellihire
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - LLM_PROVIDER=${LLM_PROVIDER:-openai}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - UPLOAD_DIR=/app/uploads
+      - REPORTS_DIR=/app/reports
+    volumes:
+      - ./uploads:/app/uploads
+      - ./reports:/app/reports
+      - .:/app                       # live-reload in dev (remove in prod)
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - intellihire-net
+    command: >
+      uvicorn app.main:app
+      --host 0.0.0.0
+      --port 8000
+      --reload
+      --log-level info
+
+  # ── MongoDB ───────────────────────────────────────────
+  mongodb:
+    image: mongo:7.0
+    container_name: intellihire_mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=intellihire
+    volumes:
+      - mongo_data:/data/db
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - intellihire-net
+
+  # ── Mongo Express (dev UI) ───────────────────────────
+  mongo-express:
+    image: mongo-express:1.0.2
+    container_name: intellihire_mongo_ui
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=intellihire123
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - intellihire-net
+    profiles:
+      - dev                          # only starts with: docker compose --profile dev up
+
+
+# ── Volumes & Networks ────────────────────────────────────
+
+volumes:
+  mongo_data:
+    driver: local
+
+networks:
+  intellihire-net:
+    driver: bridge
