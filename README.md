@@ -1,13 +1,14 @@
 # IntelliHire — AI Placement Trainer
 
-[![Deploy Status](https://github.com/YOUR_USERNAME/intellihire/actions/workflows/deploy.yml/badge.svg)](https://github.com/YOUR_USERNAME/intellihire/actions)
-[![Live Demo](https://img.shields.io/badge/demo-GitHub%20Pages-blue)](https://YOUR_USERNAME.github.io/intellihire)
-[![Backend](https://img.shields.io/badge/backend-Render.com-purple)](https://intellihire-api.onrender.com/docs)
+[![Deploy Status](https://github.com/Student-Cybrarians/intellihire/actions/workflows/deploy.yml/badge.svg)](https://github.com/Student-Cybrarians/intellihire/actions)
+[![Live Demo](https://img.shields.io/badge/demo-GitHub%20Pages-blue)](https://student-cybrarians.github.io/intellihire)
+[![Backend](https://img.shields.io/badge/backend-Render.com-purple)](https://intellihire-5x74.onrender.com/docs)
 
 > **B.Tech CSE (AI/ML) Major Project** — End-to-end AI-powered placement preparation system
 
-**Live Demo →** https://YOUR_USERNAME.github.io/intellihire  
-**API Docs →** https://intellihire-api.onrender.com/docs
+**🌐 Live Demo →** https://student-cybrarians.github.io/intellihire  
+**⚡ API Docs →** https://intellihire-5x74.onrender.com/docs  
+**❤️ Health →** https://intellihire-5x74.onrender.com/health
 
 ---
 
@@ -21,14 +22,6 @@
 | M4 — HR Simulator | Voice + NLP sentiment | 🔜 Soon |
 | M5 — CV Analysis | Face · Eye · Emotion · Confidence | 🔜 Soon |
 
-## Quick Deploy
-
-```bash
-git clone https://github.com/YOUR_USERNAME/intellihire
-```
-
-See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for complete step-by-step instructions.
-
 ## Tech Stack
 
 **Frontend**: Vanilla HTML/CSS/JS → GitHub Pages  
@@ -36,4 +29,4 @@ See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for complete step-by-step instructions.
 **Database**: MongoDB Atlas (free tier)  
 **NLP**: spaCy + sentence-transformers  
 **LLM**: OpenAI GPT-4o / Claude 3.5  
-**CI/CD**: GitHub Actions  
+**CI/CD**: GitHub Actions
