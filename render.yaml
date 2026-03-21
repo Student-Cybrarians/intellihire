@@ -2,10 +2,9 @@ services:
   - type: web
     name: intellihire-api
     runtime: python
-    region: singapore      # closest free region to India
     plan: free
     buildCommand: pip install -r requirements.txt && python -m spacy download en_core_web_sm
-    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: ENVIRONMENT
@@ -28,3 +27,5 @@ services:
         value: /tmp/uploads
       - key: REPORTS_DIR
         value: /tmp/reports
+      - key: PYTHONPATH
+        value: /opt/render/project/src
