@@ -1,30 +1,35 @@
-# ── Web Framework ──────────────────────────────
+# ── Web Framework ─────────────────────
 fastapi==0.111.0
 uvicorn[standard]==0.29.0
 python-multipart==0.0.9
+gunicorn==22.0.0
 
-# ── NLP (lightweight — no C compilation needed) ─
+# ── NLP (pure Python, no C build) ─────
 nltk==3.8.1
 scikit-learn==1.5.0
 numpy==1.26.4
 
-# ── Resume Parsing ─────────────────────────────
+# ── Resume Parsing ────────────────────
 PyMuPDF==1.24.3
 python-docx==1.1.0
 
-# ── LLM APIs ───────────────────────────────────
+# ── LLM: Azure OpenAI + OpenAI ────────
 openai==1.30.1
-anthropic==0.26.0
+azure-ai-inference==1.0.0b3
 
-# ── Database ───────────────────────────────────
+# ── Database: Azure Cosmos DB ─────────
 motor==3.4.0
 pymongo==4.7.2
 beanie==1.25.0
 
-# ── PDF Generation ─────────────────────────────
+# ── Azure SDK ─────────────────────────
+azure-identity==1.17.1
+azure-storage-blob==12.20.0
+
+# ── PDF Generation ────────────────────
 reportlab==4.2.0
 
-# ── Utilities ──────────────────────────────────
+# ── Utilities ─────────────────────────
 python-dotenv==1.0.1
 pydantic==2.7.1
 pydantic-settings==2.3.0
