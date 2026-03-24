@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>About — IntelliHire</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06060f;--bg2:#0d0d1a;--bg3:#13131f;--surface:#1a1a2e;--surface2:#20203a;
+  --border:#ffffff12;--border2:#ffffff1e;
+  --cyan:#00d4ff;--green:#22c55e;--amber:#f59e0b;--purple:#a78bfa;
+  --red:#ef4444;--pink:#ec4899;--blue:#3b82f6;--ms:#0078d4;
+  --text:#f0f0ff;--text2:#a0a0c0;--text3:#60607a;
+  --fd:'Syne',sans-serif;--fm:'JetBrains Mono',monospace;--fb:'DM Sans',sans-serif;
+  --r:12px;--r2:8px;
+}
+html{overflow-x:hidden;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100vh}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(6,6,15,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-family:var(--fd);font-size:1.1rem;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.nav-logo span{color:var(--cyan)}
+.nav-links{display:flex;gap:1.5rem;align-items:center}
+.nav-links a{font-size:.82rem;color:var(--text2);text-decoration:none;transition:color .2s;font-weight:500}
+.nav-links a:hover,.nav-links a.active{color:var(--cyan)}
+.nav-badge{font-family:var(--fm);font-size:.65rem;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);color:var(--cyan);padding:3px 10px;border-radius:20px}
+
+/* HERO */
+.hero{padding:5rem 2rem 3.5rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 900px 500px at 50% 0%,rgba(0,212,255,.06) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:.68rem;background:rgba(0,120,212,.1);border:1px solid rgba(0,120,212,.25);color:var(--ms);padding:5px 14px;border-radius:20px;margin-bottom:1.5rem}
+.hero h1{font-family:var(--fd);font-size:clamp(2.4rem,7vw,4rem);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:1rem}
+.hero h1 .accent{color:var(--cyan)}
+.hero-sub{font-size:1rem;color:var(--text2);max-width:640px;margin:0 auto 2rem;line-height:1.7}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:2.5rem}
+.hero-tag{font-family:var(--fm);font-size:.67rem;padding:4px 12px;border-radius:6px;border:1px solid var(--border2);color:var(--text2);background:var(--surface)}
+.hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
+.hstat{text-align:center}
+.hstat-n{font-family:var(--fd);font-size:2rem;font-weight:800;color:var(--cyan)}
+.hstat-l{font-size:.75rem;color:var(--text3);margin-top:2px}
+
+/* SECTION */
+.section{padding:3rem 2rem;max-width:1100px;margin:0 auto}
+.section-title{font-family:var(--fd);font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.4rem}
+.section-sub{font-size:.87rem;color:var(--text2);margin-bottom:2rem}
+.slabel{font-family:var(--fm);font-size:.67rem;text-transform:uppercase;letter-spacing:.09em;color:var(--text3);margin-bottom:.875rem;display:flex;align-items:center;gap:10px}
+.slabel::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* MISSION */
+.mission-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:2rem}
+.mcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;transition:border-color .2s}
+.mcard:hover{border-color:var(--border2)}
+.mcard-icon{font-size:1.5rem;margin-bottom:.75rem}
+.mcard h3{font-size:.95rem;font-weight:600;margin-bottom:.5rem}
+.mcard p{font-size:.8rem;color:var(--text2);line-height:1.7}
+
+/* MODULE OVERVIEW CARDS */
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.875rem;margin-bottom:2rem}
+.mod-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;cursor:pointer;transition:all .2s;text-decoration:none;display:block}
+.mod-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.mc-num{font-family:var(--fm);font-size:.65rem;color:var(--text3);margin-bottom:.4rem}
+.mc-title{font-family:var(--fd);font-size:.9rem;font-weight:700;margin-bottom:.4rem}
+.mc-desc{font-size:.75rem;color:var(--text3);line-height:1.5;margin-bottom:.75rem}
+.mc-status{display:inline-flex;align-items:center;gap:4px;font-family:var(--fm);font-size:.62rem;padding:3px 8px;border-radius:4px}
+.mc-live{background:rgba(34,197,94,.09);color:var(--green)}
+.mc-soon{background:rgba(245,158,11,.09);color:var(--amber)}
+
+/* Module tabs */
+.mod-tabs{display:flex;gap:0;overflow-x:auto;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
+.mod-tabs::-webkit-scrollbar{height:0}
+.mod-tab{font-family:var(--fm);font-size:.75rem;padding:13px 18px;color:var(--text3);white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;cursor:pointer;display:flex;align-items:center;gap:7px;flex-shrink:0}
+.mod-tab:hover{color:var(--text2)}
+.mod-tab.active{border-bottom-color:var(--cyan);color:var(--cyan)}
+.mod-tab .mn{font-size:.62rem;background:var(--surface);padding:2px 6px;border-radius:4px}
+.mod-tab.active .mn{background:rgba(0,212,255,.12);color:var(--cyan)}
+.sub-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.sub-tab{font-size:.73rem;font-weight:500;padding:6px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .18s;white-space:nowrap;font-family:var(--fb)}
+.sub-tab.active{background:var(--cyan);color:#000;border-color:var(--cyan)}
+.mod-panel{display:none}.mod-panel.active{display:block;animation:fi .25s ease}
+.sub-panel{display:none}.sub-panel.active{display:block;animation:fi .2s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* CARDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.875rem;margin-bottom:1.5rem}
+.acard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem}
+.ah{display:flex;align-items:center;gap:10px;margin-bottom:.6rem}
+.ai{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.an{font-size:.875rem;font-weight:500}
+.at{font-size:.67rem;color:var(--text3);font-family:var(--fm);margin-top:1px}
+.ad{font-size:.78rem;color:var(--text2);line-height:1.6;margin-bottom:.625rem}
+.au{font-size:.65rem;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.35rem;font-family:var(--fm)}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{font-size:.67rem;padding:2px 8px;border-radius:4px;font-weight:500;border:1px solid}
+.c-cyan{background:rgba(0,212,255,.07);color:var(--cyan);border-color:rgba(0,212,255,.18)}
+.c-green{background:rgba(34,197,94,.07);color:var(--green);border-color:rgba(34,197,94,.18)}
+.c-amber{background:rgba(245,158,11,.07);color:var(--amber);border-color:rgba(245,158,11,.18)}
+.c-purple{background:rgba(167,139,250,.07);color:var(--purple);border-color:rgba(167,139,250,.18)}
+.c-red{background:rgba(239,68,68,.07);color:var(--red);border-color:rgba(239,68,68,.18)}
+.c-pink{background:rgba(236,72,153,.07);color:var(--pink);border-color:rgba(236,72,153,.18)}
+.c-blue{background:rgba(59,130,246,.07);color:var(--blue);border-color:rgba(59,130,246,.18)}
+.c-ms{background:rgba(0,120,212,.09);color:var(--ms);border-color:rgba(0,120,212,.22)}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;font-size:.78rem;margin-bottom:1.5rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+th{text-align:left;padding:9px 12px;font-size:.66rem;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);border-bottom:1px solid var(--border);font-family:var(--fm);background:var(--surface)}
+td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text2);line-height:1.5;font-size:.77rem}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surface)}
+.badge{display:inline-block;font-size:.63rem;font-weight:500;padding:2px 7px;border-radius:4px;font-family:var(--fm)}
+
+/* FORMULA */
+.formula{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r2);padding:1rem;font-family:var(--fm);font-size:.77rem;margin-bottom:1rem}
+.ftitle{font-size:.66rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:.5rem}
+.fl{padding:2px 0;color:var(--text2)}
+.fl .hl{color:var(--cyan)}
+.fl .cm{color:var(--text3);font-size:.68rem}
+
+/* STACK ROWS */
+.srow{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)}
+.srow:last-child{border-bottom:none}
+.slayer{font-family:var(--fm);font-size:.67rem;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;min-width:110px;padding-top:3px;flex-shrink:0}
+.spills{display:flex;flex-wrap:wrap;gap:4px}
+.spill{font-size:.7rem;padding:3px 8px;border-radius:4px;background:var(--surface2);color:var(--text2);border:1px solid var(--border)}
+
+/* FLOW */
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:5px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:.875rem 1.1rem;margin-bottom:1.25rem}
+.fb{font-size:.7rem;font-weight:500;padding:6px 11px;border-radius:6px;color:#fff;white-space:nowrap}
+.fa{color:var(--text3);font-size:.8rem}
+
+/* IRT CURVE */
+.irt-curve{display:flex;align-items:flex-end;gap:2px;height:80px;margin-bottom:.4rem}
+.irt-bar{flex:1;border-radius:2px 2px 0 0;min-height:3px}
+
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+.team-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;text-align:center;transition:all .2s}
+.team-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.team-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--surface2),var(--surface));border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto .875rem}
+.team-name{font-weight:600;font-size:.9rem;margin-bottom:.25rem}
+.team-role{font-size:.75rem;color:var(--text3);font-family:var(--fm)}
+
+/* ROADMAP */
+.timeline{position:relative;padding-left:1.5rem;margin-bottom:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
+.titem{position:relative;padding:0 0 1.5rem 1.25rem}
+.titem::before{content:'';position:absolute;left:-4.5px;top:4px;width:9px;height:9px;border-radius:50%;background:var(--surface2);border:1.5px solid var(--border2)}
+.titem.done::before{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(34,197,94,.4)}
+.titem.active::before{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 8px rgba(0,212,255,.4)}
+.t-label{font-family:var(--fm);font-size:.65rem;color:var(--text3);margin-bottom:.25rem;text-transform:uppercase;letter-spacing:.06em}
+.t-title{font-size:.9rem;font-weight:600;margin-bottom:.25rem}
+.t-desc{font-size:.78rem;color:var(--text2);line-height:1.6}
+
+/* TECH OVERVIEW */
+.tech-overview{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.75rem;margin-bottom:2rem}
+.tblock{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:.875rem;text-align:center}
+.tblock-icon{font-size:1.3rem;margin-bottom:.4rem}
+.tblock-name{font-size:.8rem;font-weight:600;margin-bottom:.25rem}
+.tblock-sub{font-size:.68rem;color:var(--text3)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center}
+footer p{font-size:.78rem;color:var(--text3)}
+footer a{color:var(--cyan);text-decoration:none}
+
+@media(max-width:600px){
+  nav{padding:0 1rem}
+  .nav-links{gap:.75rem}
+  .nav-links a{font-size:.75rem}
+  .hero{padding:3.5rem 1.25rem 2.5rem}
+  .section{padding:2rem 1.25rem}
+  .hero-stats{gap:1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Intelli<span>Hire</span></div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <span class="nav-badge">B.Tech CSE · AI/ML</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">🔵 100% Microsoft Azure · Major Project · Student-Cybrarians</div>
+  <h1>About <span class="accent">IntelliHire</span></h1>
+  <p class="hero-sub">An end-to-end AI-powered interview preparation platform built on Azure — combining NLP, adaptive testing, computer vision, and large language models to simulate real hiring rounds.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">Azure OpenAI GPT-4o</span>
+    <span class="hero-tag">FastAPI + Python</span>
+    <span class="hero-tag">Computer Vision</span>
+    <span class="hero-tag">IRT Adaptive MCQ</span>
+    <span class="hero-tag">Azure Cosmos DB</span>
+    <span class="hero-tag">TensorFlow.js</span>
+    <span class="hero-tag">Azure Speech</span>
+    <span class="hero-tag">YOLOv8 Pose</span>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">5</div><div class="hstat-l">AI Modules</div></div>
+    <div class="hstat"><div class="hstat-n">20+</div><div class="hstat-l">Algorithms</div></div>
+    <div class="hstat"><div class="hstat-n">15+</div><div class="hstat-l">Azure Services</div></div>
+    <div class="hstat"><div class="hstat-n">100%</div><div class="hstat-l">Cloud Native</div></div>
+  </div>
+</div>
+
+<!-- MISSION -->
+<div class="section">
+  <div class="slabel">What We're Building</div>
+  <div class="mission-grid">
+    <div class="mcard">
+      <div class="mcard-icon">🎯</div>
+      <h3>The Problem</h3>
+      <p>Most students fail interviews not because of lack of knowledge — but lack of practice. Traditional mock interviews are expensive, inconsistent, and don't scale. IntelliHire solves this with AI.</p>
+    </div>
+    <div class="mcard">
+      <div class="mcard-icon">🤖</div>
+      <h3>The Solution</h3>
+      <p>A 5-module pipeline that mirrors real hiring: ATS screening → Aptitude test → Technical round → HR simulation → Behavioral analysis. Fully voice-enabled, adaptive, and Azure-powered.</p>
+    </div>
+    <div class="mcard">
+      <div class="mcard-icon">🔬</div>
+      <h3>The Tech</h3>
+      <p>Built on Azure OpenAI, Azure Speech, Computer Vision models (MediaPipe, DeepFace, YOLOv8), IRT psychometrics, and NLP pipelines — deployed as a static + FastAPI hybrid on Azure.</p>
+    </div>
+    <div class="mcard">
+      <div class="mcard-icon">📐</div>
+      <h3>The Approach</h3>
+      <p>Every module is research-backed: IRT 3PL adaptive testing, STAR-method NLU, EAR blink/gaze detection, VADER sentiment, and a Confidence Index formula for behavioral scoring.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE OVERVIEW -->
+<div class="section">
+  <div class="slabel">Platform Modules — Quick Overview</div>
+  <div class="mod-grid">
+    <div class="mod-card">
+      <div class="mc-num">Module 01</div>
+      <div class="mc-title">ATS Resume Analyzer</div>
+      <div class="mc-desc">NLP parsing · TF-IDF scoring · Azure OpenAI suggestions · ReportLab PDF</div>
+      <div class="mc-status mc-live">● Live</div>
+    </div>
+    <div class="mod-card">
+      <div class="mc-num">Module 02</div>
+      <div class="mc-title">Aptitude Round</div>
+      <div class="mc-desc">IRT 3PL adaptive MCQ · Azure Speech TTS/STT · Fisher Information selection</div>
+      <div class="mc-status mc-soon">◐ Building</div>
+    </div>
+    <div class="mod-card">
+      <div class="mc-num">Module 03</div>
+      <div class="mc-title">Technical Round</div>
+      <div class="mc-desc">DSA code judge · Azure OpenAI voice Q&A · Judge0 sandbox · Domain routing</div>
+      <div class="mc-status mc-soon">◐ Building</div>
+    </div>
+    <div class="mod-card">
+      <div class="mc-num">Module 04</div>
+      <div class="mc-title">HR Simulator</div>
+      <div class="mc-desc">STAR method NLP · Azure Speech voice · Sentiment analysis · Filler detection</div>
+      <div class="mc-status mc-soon">◐ Building</div>
+    </div>
+    <div class="mod-card">
+      <div class="mc-num">Module 05</div>
+      <div class="mc-title">CV Analysis</div>
+      <div class="mc-desc">Face/eye tracking · Emotion detection (DeepFace) · Body language · Confidence index</div>
+      <div class="mc-status mc-soon">◐ Building</div>
+    </div>
+  </div>
+</div>
+
+<!-- FULL TECH STACK — TABBED MODULE DEEP DIVE -->
+<div class="section">
+  <div class="section-title">All 5 Modules — Tech Stack</div>
+  <p class="section-sub">Complete AI/ML algorithms, LLMs, APIs &amp; Azure services reference</p>
+
+  <div class="mod-tabs">
+    <div class="mod-tab active" onclick="showMod('m0',this)"><span class="mn">00</span>Overview</div>
+    <div class="mod-tab" onclick="showMod('m1',this)"><span class="mn">01</span>ATS Resume</div>
+    <div class="mod-tab" onclick="showMod('m2',this)"><span class="mn">02</span>Aptitude Round</div>
+    <div class="mod-tab" onclick="showMod('m3',this)"><span class="mn">03</span>Technical Round</div>
+    <div class="mod-tab" onclick="showMod('m4',this)"><span class="mn">04</span>HR Simulator</div>
+    <div class="mod-tab" onclick="showMod('m5',this)"><span class="mn">05</span>CV Analysis</div>
+  </div>
+
+  <!-- MODULE 0 — OVERVIEW -->
+  <div id="panel-m0" class="mod-panel active">
+    <div class="slabel">Master Algorithm Table — All 5 Modules</div>
+    <table>
+      <tr><th>Module</th><th>Algorithm / Model</th><th>Type</th><th>Library / Service</th><th>Purpose</th></tr>
+      <tr><td>M1</td><td>TF-IDF Cosine Similarity</td><td><span class="badge" style="background:rgba(0,212,255,.1);color:var(--cyan)">NLP</span></td><td>scikit-learn</td><td>Resume vs JD keyword matching</td></tr>
+      <tr><td>M1</td><td>Weighted ATS Scoring</td><td><span class="badge" style="background:rgba(34,197,94,.1);color:var(--green)">Rule ML</span></td><td>Python + textstat</td><td>6-component 0–100 score</td></tr>
+      <tr><td>M1</td><td>Regex NER</td><td><span class="badge" style="background:rgba(245,158,11,.1);color:var(--amber)">NLP</span></td><td>Python re + NLTK</td><td>Extract name, email, skills from resume</td></tr>
+      <tr><td>M1</td><td>Azure OpenAI GPT-4o</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">LLM</span></td><td>Azure OpenAI</td><td>Suggestions + bullet enhancement</td></tr>
+      <tr><td>M2</td><td>IRT 3-Parameter Logistic</td><td><span class="badge" style="background:rgba(167,139,250,.1);color:var(--purple)">Psychometric</span></td><td>NumPy + SciPy</td><td>Student ability θ estimation</td></tr>
+      <tr><td>M2</td><td>MLE Newton-Raphson</td><td><span class="badge" style="background:rgba(245,158,11,.1);color:var(--amber)">Statistical</span></td><td>SciPy optimize</td><td>θ update after each answer</td></tr>
+      <tr><td>M2</td><td>Maximum Fisher Information</td><td><span class="badge" style="background:rgba(236,72,153,.1);color:var(--pink)">Info Theory</span></td><td>NumPy</td><td>Optimal question selection</td></tr>
+      <tr><td>M2</td><td>Azure Speech TTS + STT</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Speech AI</span></td><td>Azure Cognitive</td><td>Voice MCQ delivery + answer capture</td></tr>
+      <tr><td>M3</td><td>Azure OpenAI Code Analysis</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">LLM</span></td><td>Azure OpenAI</td><td>Code review, complexity analysis</td></tr>
+      <tr><td>M3</td><td>Cosine Similarity (Domain Q)</td><td><span class="badge" style="background:rgba(0,212,255,.1);color:var(--cyan)">NLP</span></td><td>scikit-learn</td><td>Answer relevance scoring</td></tr>
+      <tr><td>M3</td><td>Difficulty Progression Logic</td><td><span class="badge" style="background:rgba(34,197,94,.1);color:var(--green)">Rule ML</span></td><td>Python</td><td>Adaptive question difficulty</td></tr>
+      <tr><td>M4</td><td>VADER Sentiment Analysis</td><td><span class="badge" style="background:rgba(245,158,11,.1);color:var(--amber)">NLP</span></td><td>NLTK VADER</td><td>Emotional tone scoring</td></tr>
+      <tr><td>M4</td><td>STAR Method NLU</td><td><span class="badge" style="background:rgba(167,139,250,.1);color:var(--purple)">NLP</span></td><td>scikit-learn + regex</td><td>Detect Situation/Task/Action/Result</td></tr>
+      <tr><td>M4</td><td>Filler Word Detection</td><td><span class="badge" style="background:rgba(239,68,68,.1);color:var(--red)">NLP</span></td><td>NLTK + regex</td><td>Count uh/um/like/you know</td></tr>
+      <tr><td>M4</td><td>RoBERTa NLI</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Transformer</span></td><td>Azure AI Language</td><td>Answer relevance classification</td></tr>
+      <tr><td>M5</td><td>MediaPipe FaceMesh</td><td><span class="badge" style="background:rgba(34,197,94,.1);color:var(--green)">CV</span></td><td>MediaPipe (Google → Azure)</td><td>468-point face landmark detection</td></tr>
+      <tr><td>M5</td><td>DeepFace Emotion Model</td><td><span class="badge" style="background:rgba(167,139,250,.1);color:var(--purple)">Deep Learning</span></td><td>DeepFace + TensorFlow</td><td>7-class Ekman emotion detection</td></tr>
+      <tr><td>M5</td><td>YOLOv8 Pose Estimation</td><td><span class="badge" style="background:rgba(0,212,255,.1);color:var(--cyan)">CV/DL</span></td><td>Ultralytics YOLO</td><td>Body language &amp; posture scoring</td></tr>
+      <tr><td>M5</td><td>EAR Eye Aspect Ratio</td><td><span class="badge" style="background:rgba(245,158,11,.1);color:var(--amber)">CV</span></td><td>OpenCV + dlib</td><td>Eye contact &amp; blink detection</td></tr>
+      <tr><td>M5</td><td>Confidence Index Formula</td><td><span class="badge" style="background:rgba(236,72,153,.1);color:var(--pink)">ML Ensemble</span></td><td>NumPy + scikit-learn</td><td>Weighted composite behavioral score</td></tr>
+      <tr><td>M5</td><td>Azure Video Indexer</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">AI Video</span></td><td>Azure Media Services</td><td>Cloud-side emotion + motion analysis</td></tr>
+    </table>
+
+    <div class="slabel">Complete Azure Services — All Modules</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem">
+      <div class="srow"><div class="slayer">AI / LLM</div><div class="spills"><span class="spill">Azure OpenAI GPT-4o</span><span class="spill">Azure Speech TTS Neural</span><span class="spill">Azure Speech STT</span><span class="spill">Azure AI Content Safety</span><span class="spill">Azure AI Language (RoBERTa)</span><span class="spill">Azure Video Indexer</span><span class="spill">Azure Face API</span></div></div>
+      <div class="srow"><div class="slayer">Compute</div><div class="spills"><span class="spill">Azure App Service F1</span><span class="spill">Azure Static Web Apps</span><span class="spill">Azure Container Apps</span></div></div>
+      <div class="srow"><div class="slayer">Database</div><div class="spills"><span class="spill">Azure Cosmos DB (MongoDB API)</span><span class="spill">Azure Blob Storage</span></div></div>
+      <div class="srow"><div class="slayer">CV Libraries</div><div class="spills"><span class="spill">OpenCV</span><span class="spill">MediaPipe FaceMesh</span><span class="spill">DeepFace</span><span class="spill">YOLOv8 Pose</span><span class="spill">dlib 68-pt</span><span class="spill">TensorFlow.js</span></div></div>
+      <div class="srow"><div class="slayer">ML / NLP</div><div class="spills"><span class="spill">scikit-learn</span><span class="spill">NLTK</span><span class="spill">NumPy</span><span class="spill">SciPy</span><span class="spill">textstat</span><span class="spill">rapidfuzz</span><span class="spill">VADER</span></div></div>
+      <div class="srow"><div class="slayer">CI/CD</div><div class="spills"><span class="spill">GitHub Actions</span><span class="spill">GitHub (Microsoft)</span></div></div>
+    </div>
+  </div>
+
+  <!-- MODULE 1 — ATS RESUME -->
+  <div id="panel-m1" class="mod-panel">
+    <div class="sub-tabs">
+      <button class="sub-tab active" onclick="showSub('m1','algo',this)">Algorithms</button>
+      <button class="sub-tab" onclick="showSub('m1','llm',this)">LLM + Azure</button>
+      <button class="sub-tab" onclick="showSub('m1','apis',this)">APIs</button>
+      <button class="sub-tab" onclick="showSub('m1','stack',this)">Full Stack</button>
+    </div>
+    <div id="m1-algo" class="sub-panel active">
+      <div class="slabel">AI/ML Algorithms — Module 1</div>
+      <div class="flow">
+        <div class="fb" style="background:#0078d4">Upload Resume</div><span class="fa">→</span>
+        <div class="fb" style="background:#7c3aed">Regex NER Parser</div><span class="fa">→</span>
+        <div class="fb" style="background:#0ea5e9">TF-IDF Matcher</div><span class="fa">→</span>
+        <div class="fb" style="background:#d97706">6-Component Scorer</div><span class="fa">→</span>
+        <div class="fb" style="background:#16a34a">Azure OpenAI Suggestions</div><span class="fa">→</span>
+        <div class="fb" style="background:#0078d4">ReportLab PDF</div>
+      </div>
+      <div class="grid">
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,212,255,.12)">📝</div><div><div class="an">Regex NER + Section Parser</div><div class="at">NLP — Entity Extraction</div></div></div><div class="ad">Rule-based Named Entity Recognition using Python regex patterns. Extracts name, email, phone, LinkedIn, GitHub, education, experience blocks, projects. Section detection via header pattern matching (50+ patterns).</div><div class="au">Libraries</div><div class="chips"><span class="chip c-cyan">Python re</span><span class="chip c-cyan">NLTK tokenizer</span><span class="chip c-cyan">PyMuPDF (PDF)</span><span class="chip c-cyan">python-docx</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(34,197,94,.12)">🔍</div><div><div class="an">TF-IDF Cosine Similarity</div><div class="at">NLP — Keyword Matching</div></div></div><div class="ad">Term Frequency–Inverse Document Frequency vectorizes both resume and JD. Cosine similarity gives match percentage. Used for keyword match (30% weight) and experience relevance (20% weight) in ATS score.</div><div class="au">Libraries</div><div class="chips"><span class="chip c-green">scikit-learn TfidfVectorizer</span><span class="chip c-green">cosine_similarity</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(245,158,11,.12)">📊</div><div><div class="an">Weighted ATS Scorer</div><div class="at">Rule-based ML — Composite Scoring</div></div></div><div class="ad">Six-component weighted scoring: Keyword Match (30%), Skills Match (20%), Experience Relevance (20%), Formatting (10%), Readability (10%), Section Completeness (10%). Final 0–100 score = Σ(weight × component).</div><div class="au">Formula</div><div class="chips"><span class="chip c-amber">ATS = Σ(wᵢ × sᵢ) × 100</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(167,139,250,.12)">📖</div><div><div class="an">Flesch-Kincaid Readability</div><div class="at">Statistical NLP</div></div></div><div class="ad">Flesch Reading Ease score measures resume language clarity. Optimal range 60–80 for professional resumes. Penalizes overly complex or overly simple text. Part of 10% readability ATS component.</div><div class="au">Library</div><div class="chips"><span class="chip c-purple">textstat.flesch_reading_ease()</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(236,72,153,.12)">⚡</div><div><div class="an">Skill Gap Prioritizer</div><div class="at">Rule-based Ranking</div></div></div><div class="ad">Ranks missing skills by frequency in JD using regex count. Most-mentioned missing skills ranked highest — e.g., if "Kubernetes" appears 4 times in JD and missing from resume, it's Priority 1 to add.</div><div class="au">Libraries</div><div class="chips"><span class="chip c-pink">Python re.findall()</span><span class="chip c-pink">sorted() by freq</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(239,68,68,.12)">🔤</div><div><div class="an">Fuzzy String Matching</div><div class="at">NLP — Approximate Match</div></div></div><div class="ad">rapidfuzz library catches skill aliases: "JS" ↔ "JavaScript", "ML" ↔ "Machine Learning", "K8s" ↔ "Kubernetes". Threshold ≥ 82% similarity treated as a match. Prevents false negatives in skill matching.</div><div class="au">Library</div><div class="chips"><span class="chip c-red">rapidfuzz.fuzz.ratio()</span><span class="chip c-red">threshold 82%</span></div></div>
+      </div>
+      <div class="slabel">ATS Scoring Formula</div>
+      <div class="formula">
+        <div class="ftitle">6-Component Weighted ATS Score</div>
+        <div class="fl"><span class="hl">ATS_Score</span> = Σ(wᵢ × sᵢ) × 100</div>
+        <div class="fl" style="margin-top:.4rem"><span class="hl">w₁=0.30</span> × keyword_match   <span class="cm">← TF-IDF: resume∩JD keywords / JD keywords</span></div>
+        <div class="fl"><span class="hl">w₂=0.20</span> × skills_match     <span class="cm">← exact + fuzzy skill overlap</span></div>
+        <div class="fl"><span class="hl">w₃=0.20</span> × exp_relevance    <span class="cm">← TF-IDF cosine(experience_text, JD)</span></div>
+        <div class="fl"><span class="hl">w₄=0.10</span> × formatting        <span class="cm">← contact info + length + bullets + dates</span></div>
+        <div class="fl"><span class="hl">w₅=0.10</span> × readability       <span class="cm">← Flesch-Kincaid ease score (optimal 60–80)</span></div>
+        <div class="fl"><span class="hl">w₆=0.10</span> × section_complete  <span class="cm">← found_sections / 6 expected sections</span></div>
+      </div>
+    </div>
+    <div id="m1-llm" class="sub-panel">
+      <div class="slabel">Azure OpenAI — Module 1</div>
+      <div class="grid">
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,120,212,.12)">🤖</div><div><div class="an">Azure OpenAI GPT-4o</div><div class="at">Suggestions + Bullet Enhancement</div></div></div><div class="ad">3 prompts: (1) 8 improvement suggestions tailored to missing JD keywords, (2) rewrite weak bullets into metric-driven STAR bullets, (3) generate professional summary. Temperature 0.3 for factual, 0.7 for creative.</div><div class="chips"><span class="chip c-ms">azure.openai.azure.com</span><span class="chip c-ms">gpt-4o deployment</span><span class="chip c-ms">AsyncAzureOpenAI SDK</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,120,212,.12)">📄</div><div><div class="an">ReportLab PDF Generator</div><div class="at">ATS-Safe Resume PDF</div></div></div><div class="ad">Pure Python PDF generation — no system libraries needed. Single-column ATS-safe layout: no tables, no text boxes, no columns. Standard section headings. Arial font. Machine-readable by all ATS parsers.</div><div class="chips"><span class="chip c-ms">reportlab==4.2.0</span><span class="chip c-ms">ATS single-column</span></div></div>
+      </div>
+      <div class="formula">
+        <div class="ftitle">Bullet Enhancement Prompt (Azure OpenAI)</div>
+        <div class="fl"><span class="hl">System:</span> Resume expert. Rewrite bullets using STAR method. Start with action verb.</div>
+        <div class="fl"><span class="hl">Rules:</span>  Add metrics (%, $, scale). Under 25 words. Return JSON array.</div>
+        <div class="fl"><span class="hl">Input:</span>  "Worked on backend APIs"</div>
+        <div class="fl"><span class="hl">Output:</span> "Architected 5 FastAPI REST APIs reducing latency 35%, serving 50k daily users"</div>
+      </div>
+    </div>
+    <div id="m1-apis" class="sub-panel">
+      <table>
+        <tr><th>API / Service</th><th>Provider</th><th>Used For</th></tr>
+        <tr><td>Azure OpenAI GPT-4o</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Improvement suggestions, bullet rewriting, summary generation</td></tr>
+        <tr><td>Azure Cosmos DB (MongoDB)</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Store parsed resumes, analyses, JD documents</td></tr>
+        <tr><td>Azure App Service</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Host FastAPI backend (Python 3.11)</td></tr>
+        <tr><td>Azure Static Web Apps</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Host frontend with global CDN</td></tr>
+        <tr><td>Azure Blob Storage</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Store uploaded resume files + generated PDFs</td></tr>
+        <tr><td>PyMuPDF (fitz)</td><td><span class="badge" style="background:rgba(34,197,94,.1);color:var(--green)">Python</span></td><td>PDF text extraction</td></tr>
+        <tr><td>python-docx</td><td><span class="badge" style="background:rgba(34,197,94,.1);color:var(--green)">Python</span></td><td>DOCX text extraction with table support</td></tr>
+      </table>
+    </div>
+    <div id="m1-stack" class="sub-panel">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem">
+        <div class="srow"><div class="slayer">LLM</div><div class="spills"><span class="spill">Azure OpenAI GPT-4o</span></div></div>
+        <div class="srow"><div class="slayer">NLP / ML</div><div class="spills"><span class="spill">scikit-learn TF-IDF</span><span class="spill">NLTK</span><span class="spill">textstat</span><span class="spill">rapidfuzz</span><span class="spill">Python re (Regex NER)</span></div></div>
+        <div class="srow"><div class="slayer">Parsing</div><div class="spills"><span class="spill">PyMuPDF (PDF)</span><span class="spill">python-docx (DOCX)</span><span class="spill">pdfminer (fallback)</span></div></div>
+        <div class="srow"><div class="slayer">PDF Gen</div><div class="spills"><span class="spill">ReportLab (ATS-safe)</span></div></div>
+        <div class="srow"><div class="slayer">Backend</div><div class="spills"><span class="spill">FastAPI</span><span class="spill">Pydantic v2</span><span class="spill">Beanie ODM</span><span class="spill">Motor async</span><span class="spill">Uvicorn</span></div></div>
+        <div class="srow"><div class="slayer">Azure</div><div class="spills"><span class="spill">Azure OpenAI</span><span class="spill">Azure Cosmos DB</span><span class="spill">Azure App Service</span><span class="spill">Azure Static Web Apps</span><span class="spill">Azure Blob Storage</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 2 — APTITUDE -->
+  <div id="panel-m2" class="mod-panel">
+    <div class="sub-tabs">
+      <button class="sub-tab active" onclick="showSub('m2','algo',this)">Algorithms</button>
+      <button class="sub-tab" onclick="showSub('m2','llm',this)">LLM + Voice</button>
+      <button class="sub-tab" onclick="showSub('m2','apis',this)">APIs</button>
+      <button class="sub-tab" onclick="showSub('m2','stack',this)">Full Stack</button>
+    </div>
+    <div id="m2-algo" class="sub-panel active">
+      <div class="slabel">IRT Adaptive Algorithm</div>
+      <div class="flow">
+        <div class="fb" style="background:#0078d4">θ₀ = 0</div><span class="fa">→</span>
+        <div class="fb" style="background:#7c3aed">Max Fisher Info → Q</div><span class="fa">→</span>
+        <div class="fb" style="background:#0ea5e9">Azure TTS Voice</div><span class="fa">→</span>
+        <div class="fb" style="background:#16a34a">Azure STT Answer</div><span class="fa">→</span>
+        <div class="fb" style="background:#d97706">MLE → θ_new</div><span class="fa">→</span>
+        <div class="fb" style="background:#db2777">SE(θ)&lt;0.3? Stop</div>
+      </div>
+      <div class="slabel">IRT Curve Visualizer</div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:1.25rem">
+        <div class="irt-curve" id="irt-m2"></div>
+        <div style="font-family:var(--fm);font-size:.65rem;color:var(--text3)">Item Characteristic Curve — 3PL model: P(θ) = c + (1-c)/(1+e^{-a(θ-b)})</div>
+      </div>
+      <div class="grid">
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(167,139,250,.12)">📐</div><div><div class="an">IRT 3-Parameter Logistic</div><div class="at">Psychometric Model</div></div></div><div class="ad">Models item probability as a function of student ability θ. Three parameters: a (discrimination), b (difficulty), c (guessing). Allows adaptive selection of questions at the right difficulty level for each student.</div><div class="au">Libraries</div><div class="chips"><span class="chip c-purple">NumPy</span><span class="chip c-purple">SciPy</span><span class="chip c-purple">Custom IRT engine</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(245,158,11,.12)">🎯</div><div><div class="an">Maximum Fisher Information</div><div class="at">Information Theory — Question Selection</div></div></div><div class="ad">Selects the next question by maximizing Fisher Information I(θ) = [P′(θ)]² / [P(θ)(1-P(θ))]. The question with highest information at current θ estimate is chosen — most efficient ability measurement.</div><div class="au">Formula</div><div class="chips"><span class="chip c-amber">I(θ) = [P′(θ)]² / [P(θ)(1-P(θ))]</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,212,255,.12)">🔢</div><div><div class="an">MLE Newton-Raphson</div><div class="at">Statistical Optimization</div></div></div><div class="ad">After each answer, updates θ using Maximum Likelihood Estimation with Newton-Raphson iteration. Converges in 2–3 steps. Stops when Standard Error SE(θ) &lt; 0.3, meaning sufficient precision reached.</div><div class="au">Library</div><div class="chips"><span class="chip c-cyan">scipy.optimize</span><span class="chip c-cyan">SE(θ) stopping criterion</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(34,197,94,.12)">🧩</div><div><div class="an">Naive Bayes Topic Router</div><div class="at">ML Classifier</div></div></div><div class="ad">Before starting adaptive test, classifies student's domain (Math, Verbal, Logical, Data Interpretation) using Naive Bayes on resume skills. Routes question bank to relevant topic. Trained on labelled question corpus.</div><div class="au">Library</div><div class="chips"><span class="chip c-green">scikit-learn MultinomialNB</span><span class="chip c-green">TF-IDF features</span></div></div>
+      </div>
+    </div>
+    <div id="m2-llm" class="sub-panel">
+      <div class="slabel">Azure Speech — Voice MCQ Delivery</div>
+      <div class="grid">
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,120,212,.12)">🔊</div><div><div class="an">Azure Neural TTS</div><div class="at">Text-to-Speech</div></div></div><div class="ad">Neural voice synthesis reads MCQ question aloud. Voice: en-US-JennyNeural. SSML markup adds pauses between options A/B/C/D. Adaptive pacing — slower delivery for longer questions.</div><div class="chips"><span class="chip c-ms">azure.cognitiveservices.speech</span><span class="chip c-ms">en-US-JennyNeural</span><span class="chip c-ms">SSML markup</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,120,212,.12)">🎤</div><div><div class="an">Azure Speech STT</div><div class="at">Speech-to-Text Answer Capture</div></div></div><div class="ad">Captures spoken answer ("Option B" / "B" / the answer text). Keyword spotting extracts A/B/C/D. 5-second silence timeout triggers next question. Confidence threshold 0.75 for answer acceptance.</div><div class="chips"><span class="chip c-ms">SpeechRecognizer</span><span class="chip c-ms">keyword extraction</span><span class="chip c-ms">confidence 0.75</span></div></div>
+      </div>
+    </div>
+    <div id="m2-apis" class="sub-panel">
+      <table>
+        <tr><th>API / Service</th><th>Provider</th><th>Purpose</th><th>Free Tier</th></tr>
+        <tr><td>Azure Speech TTS</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Neural voice read-out of MCQ questions</td><td>500K chars/month</td></tr>
+        <tr><td>Azure Speech STT</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Capture spoken answer selection</td><td>5 hrs audio/month</td></tr>
+        <tr><td>Azure Cosmos DB</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Store question bank, session states, θ history</td><td>Free tier forever</td></tr>
+        <tr><td>Azure App Service</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Host IRT engine FastAPI backend</td><td>F1 Free plan</td></tr>
+      </table>
+    </div>
+    <div id="m2-stack" class="sub-panel">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem">
+        <div class="srow"><div class="slayer">Psychometric</div><div class="spills"><span class="spill">IRT 3PL model</span><span class="spill">MLE Newton-Raphson</span><span class="spill">Fisher Information selector</span></div></div>
+        <div class="srow"><div class="slayer">ML</div><div class="spills"><span class="spill">Naive Bayes topic router</span><span class="spill">scikit-learn</span><span class="spill">TF-IDF features</span></div></div>
+        <div class="srow"><div class="slayer">Voice</div><div class="spills"><span class="spill">Azure Speech TTS (Neural)</span><span class="spill">Azure Speech STT</span><span class="spill">SSML markup</span></div></div>
+        <div class="srow"><div class="slayer">Backend</div><div class="spills"><span class="spill">FastAPI</span><span class="spill">NumPy</span><span class="spill">SciPy optimize</span></div></div>
+        <div class="srow"><div class="slayer">Azure</div><div class="spills"><span class="spill">Azure Speech</span><span class="spill">Azure Cosmos DB</span><span class="spill">Azure App Service</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 3 — TECHNICAL -->
+  <div id="panel-m3" class="mod-panel">
+    <div class="sub-tabs">
+      <button class="sub-tab active" onclick="showSub('m3','algo',this)">Algorithms</button>
+      <button class="sub-tab" onclick="showSub('m3','llm',this)">LLM + Code Judge</button>
+      <button class="sub-tab" onclick="showSub('m3','apis',this)">APIs</button>
+      <button class="sub-tab" onclick="showSub('m3','stack',this)">Full Stack</button>
+    </div>
+    <div id="m3-algo" class="sub-panel active">
+      <div class="slabel">Technical Round Pipeline</div>
+      <div class="flow">
+        <div class="fb" style="background:#0078d4">Domain Detect</div><span class="fa">→</span>
+        <div class="fb" style="background:#7c3aed">Voice Question</div><span class="fa">→</span>
+        <div class="fb" style="background:#0ea5e9">Code Editor</div><span class="fa">→</span>
+        <div class="fb" style="background:#16a34a">Judge0 Sandbox</div><span class="fa">→</span>
+        <div class="fb" style="background:#d97706">GPT-4o Review</div><span class="fa">→</span>
+        <div class="fb" style="background:#db2777">Score Report</div>
+      </div>
+      <div class="grid">
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,212,255,.12)">🏗️</div><div><div class="an">Domain Routing</div><div class="at">NLP Classification</div></div></div><div class="ad">Classifies candidate domain from resume: DSA, Web Dev, ML/AI, DevOps, Database. Routes to domain-specific question bank and difficulty progression. TF-IDF on resume skills + Cosine similarity to domain keyword sets.</div><div class="chips"><span class="chip c-cyan">scikit-learn</span><span class="chip c-cyan">TF-IDF + Cosine</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(34,197,94,.12)">⚖️</div><div><div class="an">Difficulty Progression</div><div class="at">Adaptive Rule ML</div></div></div><div class="ad">3-tier difficulty system (Easy → Medium → Hard). Correct answer → move up. Wrong answer → stay or drop. Tracks rolling accuracy window of last 3 questions. Ensures fair but challenging assessment.</div><div class="chips"><span class="chip c-green">Python state machine</span><span class="chip c-green">rolling window</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(167,139,250,.12)">📏</div><div><div class="an">Answer Relevance Scoring</div><div class="at">NLP — Cosine Similarity</div></div></div><div class="ad">For theory questions: TF-IDF vectorizes candidate's spoken answer vs model answer. Cosine similarity gives relevance score 0–1. Threshold 0.6 = pass. Combined with GPT-4o semantic evaluation for final score.</div><div class="chips"><span class="chip c-purple">TfidfVectorizer</span><span class="chip c-purple">cosine_similarity</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(245,158,11,.12)">🖥️</div><div><div class="an">Judge0 Code Sandbox</div><div class="at">Code Execution Engine</div></div></div><div class="ad">Secure isolated code execution for DSA problems. Supports 40+ languages. Test cases validated automatically. Returns runtime, memory, stdout/stderr. Azure-hosted Judge0 instance via Docker container.</div><div class="chips"><span class="chip c-amber">Judge0 CE API</span><span class="chip c-amber">40+ languages</span><span class="chip c-amber">Docker sandbox</span></div></div>
+      </div>
+    </div>
+    <div id="m3-llm" class="sub-panel">
+      <div class="slabel">Azure OpenAI — Code Review + Voice</div>
+      <div class="grid">
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,120,212,.12)">🤖</div><div><div class="an">GPT-4o Code Analysis</div><div class="at">LLM — Code Review</div></div></div><div class="ad">Reviews submitted code for: time/space complexity (Big-O), code style, edge case handling, optimization suggestions. Prompt includes language, problem statement, candidate's code. Returns structured JSON feedback.</div><div class="chips"><span class="chip c-ms">Azure OpenAI GPT-4o</span><span class="chip c-ms">structured JSON output</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,120,212,.12)">🎙️</div><div><div class="an">Azure Speech (Technical Q)</div><div class="at">Voice Q&amp;A Interface</div></div></div><div class="ad">Technical theory questions delivered via Azure Neural TTS. Candidate answers verbally — STT transcribes, NLP scores answer relevance. Option to type code in Monaco editor for DSA problems.</div><div class="chips"><span class="chip c-ms">Azure Speech TTS/STT</span><span class="chip c-ms">Monaco editor fallback</span></div></div>
+      </div>
+    </div>
+    <div id="m3-apis" class="sub-panel">
+      <table>
+        <tr><th>API / Service</th><th>Provider</th><th>Purpose</th><th>Free Tier</th></tr>
+        <tr><td>Azure OpenAI GPT-4o</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Code review, complexity analysis, feedback generation</td><td>Shared quota</td></tr>
+        <tr><td>Judge0 CE</td><td><span class="badge" style="background:rgba(245,158,11,.1);color:var(--amber)">Open Source</span></td><td>Secure multi-language code execution + test cases</td><td>Self-hosted free</td></tr>
+        <tr><td>Azure Speech TTS/STT</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Voice question delivery + answer capture</td><td>5 hrs + 500K chars</td></tr>
+        <tr><td>Azure Cosmos DB</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Question bank, session state, code submission history</td><td>Free forever</td></tr>
+      </table>
+    </div>
+    <div id="m3-stack" class="sub-panel">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem">
+        <div class="srow"><div class="slayer">LLM</div><div class="spills"><span class="spill">Azure OpenAI GPT-4o (code review)</span></div></div>
+        <div class="srow"><div class="slayer">Code Exec</div><div class="spills"><span class="spill">Judge0 CE (40+ languages)</span><span class="spill">Docker sandbox</span></div></div>
+        <div class="srow"><div class="slayer">NLP</div><div class="spills"><span class="spill">TF-IDF answer scoring</span><span class="spill">Cosine similarity</span><span class="spill">Domain classifier</span></div></div>
+        <div class="srow"><div class="slayer">Voice</div><div class="spills"><span class="spill">Azure Speech TTS</span><span class="spill">Azure Speech STT</span></div></div>
+        <div class="srow"><div class="slayer">Frontend</div><div class="spills"><span class="spill">Monaco Code Editor</span><span class="spill">Azure Static Web Apps</span></div></div>
+        <div class="srow"><div class="slayer">Azure</div><div class="spills"><span class="spill">Azure OpenAI</span><span class="spill">Azure Cosmos DB</span><span class="spill">Azure App Service</span><span class="spill">Azure Container Apps (Judge0)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 4 — HR SIMULATOR -->
+  <div id="panel-m4" class="mod-panel">
+    <div class="sub-tabs">
+      <button class="sub-tab active" onclick="showSub('m4','algo',this)">Algorithms</button>
+      <button class="sub-tab" onclick="showSub('m4','llm',this)">LLM + Voice</button>
+      <button class="sub-tab" onclick="showSub('m4','apis',this)">APIs</button>
+      <button class="sub-tab" onclick="showSub('m4','stack',this)">Full Stack</button>
+    </div>
+    <div id="m4-algo" class="sub-panel active">
+      <div class="slabel">HR Simulator Pipeline</div>
+      <div class="flow">
+        <div class="fb" style="background:#0078d4">HR Question (TTS)</div><span class="fa">→</span>
+        <div class="fb" style="background:#7c3aed">Voice Answer (STT)</div><span class="fa">→</span>
+        <div class="fb" style="background:#0ea5e9">STAR NLU</div><span class="fa">→</span>
+        <div class="fb" style="background:#16a34a">VADER Sentiment</div><span class="fa">→</span>
+        <div class="fb" style="background:#d97706">Filler Detection</div><span class="fa">→</span>
+        <div class="fb" style="background:#db2777">RoBERTa Score</div>
+      </div>
+      <div class="grid">
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(167,139,250,.12)">⭐</div><div><div class="an">STAR Method NLU</div><div class="at">NLP — Structured Answer Detection</div></div></div><div class="ad">Detects whether answer follows STAR structure: Situation (context keywords), Task (role/responsibility phrases), Action (past-tense verbs), Result (metric/outcome phrases). Regex + classifier hybrid. Score per component.</div><div class="chips"><span class="chip c-purple">scikit-learn</span><span class="chip c-purple">Python regex</span><span class="chip c-purple">NLTK POS tags</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(245,158,11,.12)">😊</div><div><div class="an">VADER Sentiment Analysis</div><div class="at">NLP — Tone Scoring</div></div></div><div class="ad">VADER (Valence Aware Dictionary and sEntiment Reasoner) scores each answer for positive/negative/neutral/compound tone. Optimal HR score: high positive compound (0.5–1.0). Anxiety detected via negative sentiment.</div><div class="chips"><span class="chip c-amber">NLTK SentimentIntensityAnalyzer</span><span class="chip c-amber">compound score</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(239,68,68,.12)">🚫</div><div><div class="an">Filler Word Detector</div><div class="at">NLP — Speech Quality</div></div></div><div class="ad">Counts filler words: "uh", "um", "like", "you know", "basically", "right". Regex scan on STT transcript. Score = 100 − (filler_count × 5). More than 10 fillers in a 2-min answer = significant penalty.</div><div class="chips"><span class="chip c-red">regex word boundary</span><span class="chip c-red">filler_count × 5 penalty</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,120,212,.12)">🧠</div><div><div class="an">RoBERTa NLI (Azure)</div><div class="at">Transformer — Relevance Check</div></div></div><div class="ad">Azure AI Language's RoBERTa-based NLI model classifies answer as entailment/contradiction/neutral vs ideal answer. Used for deep semantic relevance beyond cosine similarity. Catches paraphrased correct answers.</div><div class="chips"><span class="chip c-ms">Azure AI Language</span><span class="chip c-ms">NLI entailment</span></div></div>
+      </div>
+    </div>
+    <div id="m4-llm" class="sub-panel">
+      <div class="slabel">Azure OpenAI + Speech — HR Module</div>
+      <div class="grid">
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,120,212,.12)">🎭</div><div><div class="an">GPT-4o HR Interviewer</div><div class="at">LLM — Conversational HR AI</div></div></div><div class="ad">Simulates an HR interviewer. System prompt: "You are a senior HR interviewer. Ask behavioral questions. After each answer, give 2-sentence feedback." Temperature 0.6 for natural variation. Remembers conversation context.</div><div class="chips"><span class="chip c-ms">Azure OpenAI GPT-4o</span><span class="chip c-ms">system prompt</span><span class="chip c-ms">multi-turn context</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,120,212,.12)">🔊</div><div><div class="an">Azure Neural Voice (HR)</div><div class="at">TTS — Professional Voice</div></div></div><div class="ad">HR interviewer voice: en-US-GuyNeural (professional male) or en-US-AriaNeural (professional female). SSML for natural pauses, question emphasis. Simulates real interview atmosphere.</div><div class="chips"><span class="chip c-ms">en-US-GuyNeural</span><span class="chip c-ms">en-US-AriaNeural</span><span class="chip c-ms">SSML markup</span></div></div>
+      </div>
+    </div>
+    <div id="m4-apis" class="sub-panel">
+      <table>
+        <tr><th>API / Service</th><th>Provider</th><th>Purpose</th><th>Free Tier</th></tr>
+        <tr><td>Azure OpenAI GPT-4o</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>HR interviewer persona, feedback generation</td><td>Shared quota</td></tr>
+        <tr><td>Azure Speech TTS</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>HR voice question delivery</td><td>500K chars/month</td></tr>
+        <tr><td>Azure Speech STT</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Transcribe candidate's verbal answer</td><td>5 hrs/month</td></tr>
+        <tr><td>Azure AI Language (RoBERTa)</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>NLI relevance classification for semantic scoring</td><td>5K transactions</td></tr>
+        <tr><td>Azure Cosmos DB</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Store HR session, answer transcripts, scores</td><td>Free forever</td></tr>
+      </table>
+    </div>
+    <div id="m4-stack" class="sub-panel">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem">
+        <div class="srow"><div class="slayer">LLM</div><div class="spills"><span class="spill">Azure OpenAI GPT-4o (HR persona)</span></div></div>
+        <div class="srow"><div class="slayer">NLP</div><div class="spills"><span class="spill">NLTK VADER sentiment</span><span class="spill">STAR method NLU</span><span class="spill">Filler word detector</span><span class="spill">scikit-learn</span></div></div>
+        <div class="srow"><div class="slayer">Transformer</div><div class="spills"><span class="spill">Azure AI Language RoBERTa NLI</span></div></div>
+        <div class="srow"><div class="slayer">Voice</div><div class="spills"><span class="spill">Azure Speech TTS Neural</span><span class="spill">Azure Speech STT</span></div></div>
+        <div class="srow"><div class="slayer">Azure</div><div class="spills"><span class="spill">Azure OpenAI</span><span class="spill">Azure AI Language</span><span class="spill">Azure Speech</span><span class="spill">Azure Cosmos DB</span><span class="spill">Azure App Service</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 5 — CV ANALYSIS -->
+  <div id="panel-m5" class="mod-panel">
+    <div class="sub-tabs">
+      <button class="sub-tab active" onclick="showSub('m5','algo',this)">CV Algorithms</button>
+      <button class="sub-tab" onclick="showSub('m5','models',this)">DL Models</button>
+      <button class="sub-tab" onclick="showSub('m5','apis',this)">APIs</button>
+      <button class="sub-tab" onclick="showSub('m5','stack',this)">Full Stack</button>
+    </div>
+    <div id="m5-algo" class="sub-panel active">
+      <div class="slabel">CV Analysis Pipeline</div>
+      <div class="flow">
+        <div class="fb" style="background:#0078d4">WebRTC Capture</div><span class="fa">→</span>
+        <div class="fb" style="background:#7c3aed">FaceMesh (468 pts)</div><span class="fa">→</span>
+        <div class="fb" style="background:#0ea5e9">EAR Gaze</div><span class="fa">→</span>
+        <div class="fb" style="background:#16a34a">YOLOv8 Pose</div><span class="fa">→</span>
+        <div class="fb" style="background:#d97706">DeepFace Emotion</div><span class="fa">→</span>
+        <div class="fb" style="background:#db2777">Confidence Index</div>
+      </div>
+      <div class="grid">
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(0,212,255,.12)">👁️</div><div><div class="an">EAR Gaze + Blink Detection</div><div class="at">CV Algorithm</div></div></div><div class="ad">Eye Aspect Ratio formula using 6 dlib landmarks per eye. EAR &lt; 0.2 = blink. Eye direction vector from iris center relative to eye corners determines gaze. Optimal blink rate: 12–20 per minute.</div><div class="chips"><span class="chip c-cyan">EAR = (|p2-p6|+|p3-p5|) / (2|p1-p4|)</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(34,197,94,.12)">🗺️</div><div><div class="an">MediaPipe FaceMesh</div><div class="at">CV — Landmark Detection</div></div></div><div class="ad">Google's BlazeFace + mesh CNN detects 468 (x,y,z) face landmarks in real time. Runs in browser via TensorFlow.js — no server round trip. Used for gaze direction, head pose, blink detection.</div><div class="chips"><span class="chip c-green">MediaPipe</span><span class="chip c-green">TensorFlow.js (browser)</span><span class="chip c-green">468 landmarks</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(245,158,11,.12)">🧍</div><div><div class="an">YOLOv8 Pose Estimation</div><div class="at">Deep Learning — Body Language</div></div></div><div class="ad">Detects 17 body keypoints per frame: shoulders, elbows, wrists, hips, knees. Posture score = shoulder symmetry × 40 + lean_score × 40 + arm_openness × 20. Penalizes slouching or closed body language.</div><div class="chips"><span class="chip c-amber">YOLOv8n-pose</span><span class="chip c-amber">17 keypoints</span><span class="chip c-amber">Ultralytics Python</span></div></div>
+        <div class="acard"><div class="ah"><div class="ai" style="background:rgba(167,139,250,.12)">😐</div><div><div class="an">DeepFace 7-Emotion Model</div><div class="at">Deep Learning — Emotion</div></div></div><div class="ad">VGG-16 CNN trained on FER2013 detects 7 Ekman emotions per frame: Happy, Neutral, Surprise, Sad, Angry, Fear, Disgust. Emotion stability = 100 − (variance × 10). Frequent happy/neutral = best score.</div><div class="chips"><span class="chip c-purple">DeepFace</span><span class="chip c-purple">VGG-Face</span><span class="chip c-purple">7-class softmax</span></div></div>
+      </div>
+      <div class="slabel">Confidence Index Formula</div>
+      <div class="formula">
+        <div class="ftitle">Composite Confidence Score (0–100)</div>
+        <div class="fl"><span class="hl">CI</span> = 0.30×eye_contact + 0.25×emotion_stability + 0.25×posture + 0.10×smile_freq + 0.10×blink_norm</div>
+        <div class="fl" style="margin-top:.4rem"><span class="hl">eye_contact</span>       = frames_looking_at_camera / total_frames × 100</div>
+        <div class="fl"><span class="hl">emotion_stability</span> = 100 − (variance_in_emotion × 10)</div>
+        <div class="fl"><span class="hl">posture</span>           = shoulder_sym × 40 + lean_score × 40 + arm_open × 20</div>
+        <div class="fl"><span class="hl">blink_norm</span>        = 100 − |blink_rate − 16| × 5  <span class="cm">← optimal 12–20 blinks/min</span></div>
+      </div>
+    </div>
+    <div id="m5-models" class="sub-panel">
+      <div class="slabel">Deep Learning Models Used</div>
+      <table>
+        <tr><th>Model</th><th>Architecture</th><th>Task</th><th>Input → Output</th><th>Runtime</th></tr>
+        <tr><td>MediaPipe FaceMesh</td><td>BlazeFace + Mesh CNN</td><td>Face landmark detection</td><td>Frame → 468 (x,y,z) points</td><td>TensorFlow.js (browser)</td></tr>
+        <tr><td>DeepFace (VGG-Face)</td><td>VGG-16 CNN</td><td>Emotion classification</td><td>Face crop → 7-class softmax</td><td>TensorFlow (server)</td></tr>
+        <tr><td>YOLOv8-pose</td><td>YOLOv8 + keypoint head</td><td>Body pose estimation</td><td>Frame → 17 keypoint (x,y,conf)</td><td>Ultralytics (server)</td></tr>
+        <tr><td>Dlib 68-point</td><td>HOG + SVM + shape model</td><td>Facial shape fitting</td><td>Face rect → 68 landmarks</td><td>Python dlib</td></tr>
+        <tr><td>Azure Face API</td><td>Microsoft proprietary CNN</td><td>Face verification + attributes</td><td>Image → face attrs JSON</td><td>Azure cloud API</td></tr>
+        <tr><td>Azure Video Indexer</td><td>Microsoft Vision model</td><td>Full video analysis</td><td>Video → insights JSON</td><td>Azure cloud API</td></tr>
+        <tr><td>Confidence Index Reg</td><td>Polynomial Regression</td><td>Score normalization</td><td>Raw CV signals → 0–100</td><td>scikit-learn</td></tr>
+      </table>
+      <div class="slabel">7 Ekman Emotions — Per-frame Detection</div>
+      <table>
+        <tr><th>Emotion</th><th>Interview Interpretation</th><th>Score Impact</th></tr>
+        <tr><td>😊 Happy</td><td>Positive engagement, confidence</td><td>+10 stability bonus</td></tr>
+        <tr><td>😐 Neutral</td><td>Professional composure, calm</td><td>Optimal baseline</td></tr>
+        <tr><td>😮 Surprise</td><td>Occasional OK, frequent = unprepared</td><td>Mild penalty if &gt;20%</td></tr>
+        <tr><td>😢 Sad</td><td>Low confidence, disengagement</td><td>-15 if sustained &gt;10s</td></tr>
+        <tr><td>😠 Angry</td><td>Frustration, defensive</td><td>-20 confidence penalty</td></tr>
+        <tr><td>😨 Fear</td><td>High anxiety, nervousness</td><td>-15 confidence penalty</td></tr>
+        <tr><td>🤢 Disgust</td><td>Negative reaction to question</td><td>-10 communication flag</td></tr>
+      </table>
+    </div>
+    <div id="m5-apis" class="sub-panel">
+      <table>
+        <tr><th>API / Library</th><th>Provider</th><th>Purpose</th><th>Free Tier</th></tr>
+        <tr><td>Azure Video Indexer</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Full video emotion + motion + speech analysis</td><td>10 hrs/month free</td></tr>
+        <tr><td>Azure Face API</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Face verification, emotion, head pose attributes</td><td>30K transactions/month</td></tr>
+        <tr><td>Azure Blob Storage</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Store interview recordings for analysis</td><td>5GB free 12 months</td></tr>
+        <tr><td>Azure Cosmos DB</td><td><span class="badge" style="background:rgba(0,120,212,.1);color:var(--ms)">Microsoft</span></td><td>Store per-frame CV scores, emotion timeline, reports</td><td>Free tier forever</td></tr>
+        <tr><td>MediaPipe FaceMesh</td><td><span class="badge" style="background:rgba(34,197,94,.1);color:var(--green)">Google/TF</span></td><td>468-point face landmark detection (browser-side)</td><td>Free (open source)</td></tr>
+        <tr><td>DeepFace</td><td><span class="badge" style="background:rgba(167,139,250,.1);color:var(--purple)">Python</span></td><td>7-emotion classification from face crops</td><td>Free (open source)</td></tr>
+        <tr><td>YOLOv8-pose</td><td><span class="badge" style="background:rgba(245,158,11,.1);color:var(--amber)">Ultralytics</span></td><td>Body keypoint detection for posture scoring</td><td>Free (open source)</td></tr>
+        <tr><td>OpenCV</td><td><span class="badge" style="background:rgba(34,197,94,.1);color:var(--green)">Python</span></td><td>Frame capture, preprocessing, face crop extraction</td><td>Free (open source)</td></tr>
+      </table>
+    </div>
+    <div id="m5-stack" class="sub-panel">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem">
+        <div class="srow"><div class="slayer">Azure AI</div><div class="spills"><span class="spill">Azure Video Indexer</span><span class="spill">Azure Face API</span><span class="spill">Azure Blob Storage</span><span class="spill">Azure Cosmos DB</span></div></div>
+        <div class="srow"><div class="slayer">CV Models</div><div class="spills"><span class="spill">MediaPipe FaceMesh (468 landmarks)</span><span class="spill">DeepFace VGG emotion</span><span class="spill">YOLOv8 Pose (17 keypoints)</span><span class="spill">dlib 68-point</span></div></div>
+        <div class="srow"><div class="slayer">CV Libraries</div><div class="spills"><span class="spill">OpenCV (frame processing)</span><span class="spill">TensorFlow.js (browser)</span><span class="spill">NumPy (EAR formula)</span></div></div>
+        <div class="srow"><div class="slayer">Algorithms</div><div class="spills"><span class="spill">EAR blink/gaze detection</span><span class="spill">Confidence Index (weighted ensemble)</span><span class="spill">Polynomial Regression normalizer</span></div></div>
+        <div class="srow"><div class="slayer">Backend</div><div class="spills"><span class="spill">FastAPI</span><span class="spill">WebSockets (live frame stream)</span><span class="spill">Azure App Service</span></div></div>
+        <div class="srow"><div class="slayer">Frontend</div><div class="spills"><span class="spill">Azure Static Web Apps</span><span class="spill">WebRTC (webcam capture)</span><span class="spill">TensorFlow.js (browser inference)</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROADMAP -->
+<div class="section">
+  <div class="section-title">Project Roadmap</div>
+  <p class="section-sub">Development milestones for all 5 modules</p>
+  <div class="timeline">
+    <div class="titem done">
+      <div class="t-label">Phase 1 · Completed</div>
+      <div class="t-title">Module 01 — ATS Resume Analyzer</div>
+      <div class="t-desc">TF-IDF scoring, Regex NER, Azure OpenAI GPT-4o suggestions, ReportLab ATS-safe PDF generation. Live and deployed.</div>
+    </div>
+    <div class="titem active">
+      <div class="t-label">Phase 2 · In Progress</div>
+      <div class="t-title">Module 02 — Aptitude Round</div>
+      <div class="t-desc">IRT 3PL adaptive MCQ engine, Azure Speech TTS/STT voice interface, Fisher Information question selection, Naive Bayes topic routing.</div>
+    </div>
+    <div class="titem">
+      <div class="t-label">Phase 3 · Upcoming</div>
+      <div class="t-title">Module 03 — Technical Round</div>
+      <div class="t-desc">Judge0 code sandbox, domain routing, GPT-4o code review, Monaco editor, difficulty progression logic.</div>
+    </div>
+    <div class="titem">
+      <div class="t-label">Phase 4 · Upcoming</div>
+      <div class="t-title">Module 04 — HR Simulator</div>
+      <div class="t-desc">STAR method NLU, VADER sentiment, filler word detection, RoBERTa NLI scoring, GPT-4o HR interviewer persona.</div>
+    </div>
+    <div class="titem">
+      <div class="t-label">Phase 5 · Upcoming</div>
+      <div class="t-title">Module 05 — CV Analysis + Integration</div>
+      <div class="t-desc">MediaPipe FaceMesh, DeepFace emotion, YOLOv8 pose, EAR gaze, Confidence Index formula. Full platform integration and final report generation.</div>
+    </div>
+  </div>
+</div>
+
+<!-- BUILT BY -->
+<div class="section">
+  <div class="slabel">Built By</div>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;text-align:center">
+    <div style="font-family:var(--fd);font-size:1.2rem;font-weight:800;margin-bottom:.5rem">Student-Cybrarians</div>
+    <div style="font-size:.82rem;color:var(--text2);margin-bottom:1rem">B.Tech CSE (AI/ML) — Major Project</div>
+    <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+      <a href="https://github.com/Student-Cybrarians/intellihire" target="_blank" style="font-family:var(--fm);font-size:.72rem;padding:6px 14px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);color:var(--text2);text-decoration:none;transition:all .2s">⭐ GitHub Repository</a>
+      <a href="https://student-cybrarians.github.io/intellihire/" target="_blank" style="font-family:var(--fm);font-size:.72rem;padding:6px 14px;border-radius:6px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);color:var(--cyan);text-decoration:none">🚀 Live Site</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>IntelliHire © 2025 · <a href="https://github.com/Student-Cybrarians/intellihire">Student-Cybrarians</a> · Built with 100% Microsoft Azure</p>
+</footer>
+
+<script>
+function showMod(id, el){
+  document.querySelectorAll('.mod-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.mod-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+}
+function showSub(mod, sub, el){
+  const prefix=mod+'-';
+  document.querySelectorAll('[id^="'+prefix+'"]').forEach(p=>p.classList.remove('active'));
+  const panel=document.getElementById(mod+'-'+sub);
+  if(panel) panel.classList.add('active');
+  const tabs=el.closest('.sub-tabs');
+  if(tabs) tabs.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
+  if(el) el.classList.add('active');
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  const c=document.getElementById('irt-m2');
+  if(!c) return;
+  const a=1.5,b=0,cp=0.25;
+  for(let i=0;i<24;i++){
+    const theta=-3+i*0.26;
+    const p=cp+(1-cp)/(1+Math.exp(-a*(theta-b)));
+    const bar=document.createElement('div');
+    bar.className='irt-bar';
+    bar.style.height=(p*100)+'%';
+    bar.style.background=`hsl(${Math.round(p*120)},65%,55%)`;
+    bar.title=`θ=${theta.toFixed(1)}, P=${p.toFixed(2)}`;
+    c.appendChild(bar);
+  }
+});
+</script>
+</body>
+</html>
