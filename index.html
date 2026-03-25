@@ -30,7 +30,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2rem;height:60px;d
 .pulse{width:8px;height:8px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
 .nav-links{display:flex;gap:1.75rem;font-size:.85rem;color:var(--text2)}
-.nav-links a{transition:color .2s}.nav-links a:hover{color:var(--cyan)}
+.nav-links a{transition:color .2s}.nav-links a:hover,.nav-links a.active{color:var(--cyan)}
 .nav-badge{font-family:var(--font-mono);font-size:.68rem;background:var(--surface);border:1px solid var(--border2);padding:4px 12px;border-radius:20px;color:var(--cyan)}
 
 .hero{padding:130px 2rem 70px;text-align:center;position:relative;overflow:hidden}
@@ -301,7 +301,7 @@ footer span{color:var(--cyan)}
     <a href="https://github.com/Student-Cybrarians/intellihire" target="_blank">GitHub ↗</a>
   </div>
   <div class="nav-badge">v1.0 · Module 1 Live</div>
-<a href="about.html">About</a></nav>
+</nav>
 
 <div id="modules-bar" class="modules-bar" style="display:none">
   <div class="mod-tab active" onclick="showPanel('m1')" id="tab-m1"><span class="mn">01</span>ATS Resume</div>
@@ -309,6 +309,7 @@ footer span{color:var(--cyan)}
   <div class="mod-tab" onclick="showPanel('m3')" id="tab-m3"><span class="mn">03</span>Technical</div>
   <div class="mod-tab" onclick="showPanel('m4')" id="tab-m4"><span class="mn">04</span>HR Round</div>
   <div class="mod-tab" onclick="showPanel('m5')" id="tab-m5"><span class="mn">05</span>CV Analysis</div>
+  <div class="mod-tab" onclick="showPanel('about')" id="tab-about" style="margin-left:auto"><span class="mn" style="background:rgba(0,120,212,.12);color:#0078d4">ℹ</span>About</div>
 </div>
 
 <!-- HERO -->
@@ -456,7 +457,6 @@ footer span{color:var(--cyan)}
 <div id="panel-m5" class="panel"><div class="app-wrap"><div class="card" style="text-align:center;padding:3.5rem"><div style="font-size:2.5rem;margin-bottom:.875rem">👁️</div><div style="font-family:var(--font-display);font-size:1.4rem;font-weight:700;margin-bottom:.4rem">Module 05 · CV Behavioral Analysis</div><div style="color:var(--text3)">Face · Eye · Emotion · Body language scoring — Coming Soon</div></div></div></div>
 
 <div id="toast-c"></div>
-<footer>Built with ❤️ for <span>IntelliHire</span> · B.Tech CSE (AI/ML) Major Project · FastAPI · spaCy · OpenAI · MongoDB</footer>
 
 <!-- ═══ ABOUT PANEL ═══════════════════════════════════════ -->
 <div id="panel-about" class="panel">
@@ -761,6 +761,11 @@ footer span{color:var(--cyan)}
 
 </div><!-- end panel-about -->
 
+<footer style="border-top:1px solid var(--border);padding:1.75rem;text-align:center;font-family:var(--font-mono);font-size:.72rem;color:var(--text3);margin-top:0">
+  Built with ❤️ for <span style="color:var(--cyan)">IntelliHire</span> · B.Tech CSE (AI/ML) · 100% Microsoft Azure ·
+  <a href="https://github.com/Student-Cybrarians/intellihire" target="_blank" style="color:var(--text3);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text3)'">Student-Cybrarians ↗</a>
+</footer>
+
 <script>
 const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
   ? 'http://localhost:8000/api/v1'
@@ -772,11 +777,17 @@ function showPanel(id) {
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
   const bar = document.getElementById('modules-bar');
-  if(id==='hero'){bar.style.display='none';}
-  else{
-    bar.style.display='flex';
+  const noBar = id==='hero';
+  bar.style.display = noBar ? 'none' : 'flex';
+  if(!noBar){
     document.querySelectorAll('.mod-tab').forEach(t=>t.classList.remove('active'));
     const t=document.getElementById('tab-'+id);if(t)t.classList.add('active');
+  }
+  // Highlight About nav link
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  if(id==='about'){
+    const na=document.querySelector('.nav-links a[onclick*="about"]');
+    if(na) na.classList.add('active');
   }
   window.scrollTo({top:0,behavior:'smooth'});
 }
